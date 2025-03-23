@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+@import "tailwindcss";
+@source '../src/*';
+
+@layer base{
+    body {
+        @apply bg-slate-900;
+        font-family: "DM Sans", sans-serif;
+        color: white;
+    }
+}
+
+@layer components{
+    .page-container {
+        max-width: 1300px;
+        padding: 0 20px;
+        width: 100%;
+        margin: 0 auto;
+    }
+}
