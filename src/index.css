@@ -18,7 +18,6 @@
         margin: 0 auto;
     }
     
-
     .movie-list {
         display: flex;
     }
@@ -26,5 +25,9 @@
     .movie-list .swiper-slide{
         max-width: 300px;
         width: 100%;
+    }
+
+    .banner .swiper {
+        height: 100%;
     }
 }

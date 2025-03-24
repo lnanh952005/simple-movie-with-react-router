@@ -9,30 +9,24 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
-import MovieCard from "./MovieCard";
+import MovieCard from "./MovieItem";
 import fetcher from "../../configs/Config";
+import Skeleton from "react-loading-skeleton";
 
-const MovieList = () => {
-  const [movies, setMovies] = useState([]);
+const MovieList = ({ category }) => {
+  const { data, error, isLoading } = useSWR(category, fetcher);
 
-  const { data, error, isLoading } = useSWR(
-    `https://api.themoviedb.org/3/search/movie?api_key=b214ffc928a4d0c4b361593fdb4ad6ad&query=avengers`,
-    fetcher
-  );
-
-  useEffect(() => {
-    if(data) {
-      setMovies(data.results);
-    }
-  }, [data]);
+  const movieList = data?.results;
 
   console.log(data);
 
-  return (
+  return isLoading ? (
+    <Skeleton count={10} />
+  ) : (
     <div className="movie-list">
       <Swiper grabCursor="true" spaceBetween={40} slidesPerView={"auto"}>
-        {movies.length > 0 &&
-          movies.map((e) => (
+        {movieList.length > 0 &&
+          movieList.map((e) => (
             <SwiperSlide key={e.id}>
               <MovieCard item={e} />
             </SwiperSlide>
