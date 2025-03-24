@@ -1,38 +1,45 @@
 //https://api.themoviedb.org/3/search/movie?api_key=b214ffc928a4d0c4b361593fdb4ad6ad&query=avengers
 import axios from "axios";
+import useSWR from "swr";
 import { useEffect, useState } from "react";
+
+import { SwiperSlide, Swiper } from "swiper/react";
+import { Navigation, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
 import MovieCard from "./MovieCard";
-
-// core version + navigation, pagination modules:
-import {SwiperSlide, Swiper} from 'swiper/react';
-import { Navigation, Pagination } from 'swiper/modules';
-// import Swiper and modules styles
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-
-const fetchMovieApi = async () => {
-  const movieData = await axios.get(
-    "https://api.themoviedb.org/3/search/movie?api_key=b214ffc928a4d0c4b361593fdb4ad6ad&query=avengers"
-  );
-  return movieData.data;
-};
+import fetcher from "../../configs/Config";
 
 const MovieList = () => {
-  const [movie, setMovie] = useState([]);
+  const [movies, setMovies] = useState([]);
+
+  const { data, error, isLoading } = useSWR(
+    `https://api.themoviedb.org/3/search/movie?api_key=b214ffc928a4d0c4b361593fdb4ad6ad&query=avengers`,
+    fetcher
+  );
+
   useEffect(() => {
-    setMovie([...movie, fetchMovieApi()]);
-  }, [movie]);
+    if(data) {
+      setMovies(data.results);
+    }
+  }, [data]);
 
-  // init Swiper:
-const swiper = new Swiper('.swiper', {
-  // configure Swiper to use modules
-  modules: [Navigation, Pagination],
-});
+  console.log(data);
 
-  const movieList = movie.map((e) => <MovieCard key={e.id} name={e.name} />);
-
-  return { movieList };
+  return (
+    <div className="movie-list">
+      <Swiper grabCursor="true" spaceBetween={40} slidesPerView={"auto"}>
+        {movies.length > 0 &&
+          movies.map((e) => (
+            <SwiperSlide key={e.id}>
+              <MovieCard item={e} />
+            </SwiperSlide>
+          ))}
+      </Swiper>
+    </div>
+  );
 };
 
 export default MovieList;

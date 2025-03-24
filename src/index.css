@@ -17,4 +17,14 @@
         width: 100%;
         margin: 0 auto;
     }
+    
+
+    .movie-list {
+        display: flex;
+    }
+
+    .movie-list .swiper-slide{
+        max-width: 300px;
+        width: 100%;
+    }
 }

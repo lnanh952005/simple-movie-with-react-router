@@ -3,14 +3,9 @@ import "./App.css";
 import { NavLink } from "react-router-dom";
 import MovieCard from "./components/movie/MovieCard";
 import { SwiperSlide, Swiper } from "swiper/react";
+import "swiper/css";
+import MovieList from "./components/movie/MovieList";
 //https://api.themoviedb.org/3/search/movie?api_key=b214ffc928a4d0c4b361593fdb4ad6ad&query=avengers
-
-const movieCaredList = [
-  { id: 1, name: "spiderman" },
-  { id: 2, name: "superman" },
-  { id: 3, name: "batman" },
-  { id: 4, name: "homeslander" },
-];
 
 const App = () => {
   return (
@@ -49,15 +44,7 @@ const App = () => {
       {/* play now */}
       <section className="page-container">
         <h2 className="font-bold mb-5">Now Playing</h2>
-        <div className="grid grid-cols-4 gap-10">
-          <Swiper>
-            <SwiperSlide>
-              {movieCaredList.map((e) => (
-                <MovieCard key={e.id} name={e.name} />
-              ))}
-            </SwiperSlide>
-          </Swiper>
-        </div>
+        <MovieList/>
       </section>
       <section className="page-container">
         <h2 className="font-bold mb-5">Top Rated</h2>
