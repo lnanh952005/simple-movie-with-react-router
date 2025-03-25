@@ -8,6 +8,10 @@
         font-family: "DM Sans", sans-serif;
         color: white;
     }
+
+    a ,button{
+        cursor: pointer;
+    }
 }
 
 @layer components{
@@ -17,7 +21,7 @@
         width: 100%;
         margin: 0 auto;
     }
-    
+
     .movie-list {
         display: flex;
     }
@@ -29,5 +33,5 @@
 
     .banner .swiper {
         height: 100%;
-    }
+    } 
 }

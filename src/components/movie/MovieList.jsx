@@ -4,10 +4,8 @@ import useSWR from "swr";
 import { useEffect, useState } from "react";
 
 import { SwiperSlide, Swiper } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
+
 import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
 
 import MovieCard from "./MovieItem";
 import fetcher from "../../configs/Config";
@@ -28,7 +26,7 @@ const MovieList = ({ category }) => {
         {movieList.length > 0 &&
           movieList.map((e) => (
             <SwiperSlide key={e.id}>
-              <MovieCard item={e} />
+              <MovieCard item={e}/>
             </SwiperSlide>
           ))}
       </Swiper>
@@ -36,4 +34,5 @@ const MovieList = ({ category }) => {
   );
 };
 
-export default MovieList;
+
+export default MovieList

@@ -1,7 +1,7 @@
 import React from 'react'
 
 const BannerItem = ({item}) => {
-     const { title, poster_path, release_date, vote_average } = item;
+     const { title, poster_path } = item;
   return (
     <div className=" relative w-full h-full rounded-lg">
       <div className="absolute inset-0 bg-gradient-to-t from-[rgba(0,0,0,0.5)] to-[rgba(0,0,0,0.5)] rounded-lg"></div>
@@ -11,7 +11,7 @@ const BannerItem = ({item}) => {
         alt=""
       />
       <div className="absolute left-[5%] bottom-[10%] w-[40%] bg-transparent text-white">
-        <h2 className="font-bold text-3xl">Avengers: Endgame</h2>
+        <h2 className="font-bold text-3xl">{title}</h2>
         <div className="flex gap-2  my-5">
           <span className="py-2 px-4 border border-white rounded-lg">
             Action
