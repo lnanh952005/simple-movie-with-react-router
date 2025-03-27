@@ -7,6 +7,7 @@ const Header = () => {
       <header className="flex items-center justify-center gap-4 h-[100px]">
         <NavLink
           to="/"
+          end
           className={({ isActive }) =>
             isActive ? "text-pink-600 px-2 py-4" : "px-2 py-4"
           }
@@ -15,6 +16,7 @@ const Header = () => {
         </NavLink>
         <NavLink
           to="/movies"
+          end
           className={({ isActive }) =>
             isActive ? "text-pink-600 px-2 py-4" : "px-2 py-4"
           }

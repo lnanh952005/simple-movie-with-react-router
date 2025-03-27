@@ -2,8 +2,8 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 //https://i.ytimg.com/vi/K43xpeAmZ-g/maxresdefault.jpg
 const MovieItem = ({ item  }) => {
-  if(!item) return null;
   const navigate = useNavigate();
+  if(!item) return null;
   const {title,poster_path,release_date,vote_average,id} = item;
   return (
     <div className="flex flex-col h-full rounded-lg p-3 bg-slate-800 select-none">
@@ -13,8 +13,8 @@ const MovieItem = ({ item  }) => {
         onClick={(e) => navigate(`/movies/${id}`)}
         alt=""
       />
-      <div className="flex flex-col flex-1">
-        <h3 className="mb-3 line-clamp-2">{title}</h3>
+      <div className="mt-3 flex flex-col flex-1">
+        <h3 className="line-clamp-2">{title}</h3>
         <div className="mt-auto flex justify-between mb-5">
           <span>{new Date(release_date).getFullYear()}</span>
           <span>{vote_average}</span>
