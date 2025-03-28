@@ -1,15 +1,10 @@
 //https://api.themoviedb.org/3/search/movie?api_key=b214ffc928a4d0c4b361593fdb4ad6ad&query=avengers
-import axios from "axios";
 import useSWR from "swr";
-import { useEffect, useState } from "react";
 
 import { SwiperSlide, Swiper } from "swiper/react";
-
-import "swiper/css";
-
-import MovieCard from "./MovieItem";
 import fetcher from "../../configs/Config";
-import Skeleton from "react-loading-skeleton";
+import MovieItem from "./MovieItem";
+import MovieStyle  from "./MovieStyle";
 
 const MovieList = ({ category }) => {
   const { data, error, isLoading } = useSWR(category, fetcher);
@@ -18,21 +13,18 @@ const MovieList = ({ category }) => {
 
   console.log(data);
 
-  return isLoading ? (
-    <Skeleton count={10} />
-  ) : (
-    <div className="movie-list">
+  return (
+    <MovieStyle >
       <Swiper grabCursor="true" spaceBetween={40} slidesPerView={"auto"}>
-        {movieList.length > 0 &&
+        {movieList?.length > 0 &&
           movieList.map((e) => (
-            <SwiperSlide key={e.id}>
-              <MovieCard item={e}/>
+            <SwiperSlide  key={e.id}>
+              <MovieItem item={e} />
             </SwiperSlide>
           ))}
       </Swiper>
-    </div>
+    </MovieStyle>
   );
 };
-
 
 export default MovieList

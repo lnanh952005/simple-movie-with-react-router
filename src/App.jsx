@@ -1,9 +1,5 @@
-import "./App.css";
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-} from "react-router-dom";
+import "swiper/css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./layout/Header";
 import HomePage from "./pages/HomePage";
 import MoviePage from "./pages/MoviePage";
@@ -14,10 +10,10 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<Header/>}>
-          <Route index element={<HomePage />}/>
-          <Route path="/movies" element={<MoviePage/>}/>
-          <Route path="/movies/:movieId" element={<MovieDetailPage/>}/>
+        <Route element={<Header />}>
+          <Route index element={<HomePage />} />
+          <Route path="/movies" element={<MoviePage />} />
+          <Route path="/movies/:movieId" element={<MovieDetailPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

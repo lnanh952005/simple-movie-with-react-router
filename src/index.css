@@ -1,37 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
 @import "tailwindcss";
 @source '../src/*';
+@layer base {
+  body {
+    @apply bg-slate-900;
+    font-family: "DM Sans", sans-serif;
+    color: white;
+  }
 
-@layer base{
-    body {
-        @apply bg-slate-900;
-        font-family: "DM Sans", sans-serif;
-        color: white;
-    }
-
-    a ,button{
-        cursor: pointer;
-    }
+  a,
+  button {
+    cursor: pointer;
+  }
 }
 
-@layer components{
-    .page-container {
-        max-width: 1300px;
-        padding: 0 20px;
-        width: 100%;
-        margin: 0 auto;
-    }
-
-    .movie-list {
-        display: flex;
-    }
-
-    .movie-list .swiper-slide{
-        max-width: 300px;
-        width: 100%;
-    }
-
-    .banner .swiper {
-        height: 100%;
-    } 
+@layer components {
+  .page-container {
+    max-width: 1300px;
+    padding: 0 20px;
+    width: 100%;
+    margin: 0 auto;
+  }
 }

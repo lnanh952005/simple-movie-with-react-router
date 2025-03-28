@@ -1,9 +1,11 @@
-import React, { useEffect } from "react";
+
 import { useParams } from "react-router-dom";
 import useSWR from "swr";
-import fetcher from "../configs/Config";
+import fetcher, { api_key } from "../configs/Config";
 import styled from "styled-components";
-import ReactPlayer from "react-player";
+import MovieCast from "../components/movie/MovieCast";
+import MovieSimilar from "../components/movie/MovieSimilar";
+import MovieVideo from "../components/movie/MovieVideo";
 //https://api.themoviedb.org/3/movie/{movie_id}?api_key=b214ffc928a4d0c4b361593fdb4ad6ad
 
 const MovieType = styled.div`
@@ -16,9 +18,9 @@ const MovieType = styled.div`
 const MovieDetailPage = () => {
   useSWR, fetcher;
   const { movieId } = useParams();
-
+  
   const { data: movieData } = useSWR(
-    `https://api.themoviedb.org/3/movie/${movieId}?api_key=b214ffc928a4d0c4b361593fdb4ad6ad`,
+    `https://api.themoviedb.org/3/movie/${movieId}?api_key=${api_key}`,
     fetcher
   );
 
@@ -37,7 +39,7 @@ const MovieDetailPage = () => {
                 : "none",
             }}
           ></div>
-          <div className="flex flex-col w-[800px] mx-auto -mt-[100px] relative gap-[58px]">
+          <div className="flex flex-col px-5 w-[840px] mx-auto -mt-[100px] relative gap-[58px]">
             <img
               className="w-full h-[400px] object-cover rounded-lg"
               src={`https://image.tmdb.org/t/p/original${movieData?.poster_path}`}
@@ -58,63 +60,15 @@ const MovieDetailPage = () => {
             </MovieType>
             <p className="text-center">{movieData.overview}</p>
             <MovieCast movieId={movieId} />
-            <MovieVideo movieId={movieId}/>
+            <MovieVideo movieId={movieId} />
+          </div>
+          <div className="mt-10 w-full max-w-[1200px] mx-auto">
+            <MovieSimilar movieId={movieId} />
           </div>
         </div>
       )}
     </>
   );
 };
-
-function MovieCast({ movieId }) {
-  const { data } = useSWR(
-    `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=b214ffc928a4d0c4b361593fdb4ad6ad`,
-    fetcher
-  );
-  if (!data) return null;
-  const { cast } = data;
-
-  return (
-    <>
-      <h2 className="text-center text-2xl">Casts</h2>
-      <div className="grid grid-cols-4 gap-5">
-        {cast.slice(0, 4).map((e) => (
-          <div key={e.cast_id} className="flex flex-col gap-5">
-            <img
-              className="rounded-lg"
-              src={`https://image.tmdb.org/t/p/original${e.profile_path}`}
-              alt="image of character"
-            />
-            <h3 className="text-center text-2xl">{e.name}</h3>
-          </div>
-        ))}
-      </div>
-    </>
-  );
-}
-
-function MovieVideo ({movieId}) {
-  const { data } = useSWR(
-    `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=b214ffc928a4d0c4b361593fdb4ad6ad`,
-    fetcher
-  );
-  if(!data) return null;
-  const {results} = data;
-
-  console.log(results);
-
-  return (
-    <>
-      {results[0]?.key && (
-        <div className="mx-auto">
-          <ReactPlayer
-            controls
-            url={`https://www.youtube.com/watch?v=${results[0]?.key}`}
-          />
-        </div>
-      )}
-    </>
-  );
-}
 
 export default MovieDetailPage;
