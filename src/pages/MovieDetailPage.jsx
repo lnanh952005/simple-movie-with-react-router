@@ -30,7 +30,7 @@ const MovieDetailPage = () => {
         <div className="w-full h-[500px] mx-auto relative">
           <div className="absolute inset-0 bg-black opacity-30"></div>
           <div
-            className={`w-full h-full bg-no-repeat bg-cover rounded-lg ${
+            className={`w-full h-full bg-no-repeat bg-cover rounded-lg bg-top ${
               !movieData?.backdrop_path ? "animate-pulse bg-gray-300" : ""
             }`}
             style={{
