@@ -8,9 +8,9 @@ import PaginatedItems from "../utils/Pagination";
 import tmdbAPI from "../configs/ApiConfig";
 import For0For from "../components/404/For0For";
 import styled from "styled-components";
+import MovieItemSkeleton from "../components/movie/MovieItemSkeleton";
 
 export const ThemeContext = createContext();
-
 
 const MoviePage = () => {
   const [nextPage, setNextPage] = useState(1);
@@ -45,7 +45,7 @@ const MoviePage = () => {
               placeholder="find your movies..."
               className="w-full p-4 bg-white border-2 border-transparent rounded-2xl text-[#0000009f] outline-none focus:border-pink-500 transition-all"
             />
-            <div className="absolute right-0 top-1/2 -translate-y-1/2 h-full bg-pink-600 flex items-center rounded-l-2xl rounded-r-2xl pl-20 pr-10 translate-x-full">
+            <div className="absolute right-0 top-1/2 -translate-y-1/2 h-full bg-pink-600 flex items-center rounded-l-2xl rounded-r-2xl pl-20 pr-10 ">
               <img
                 className="w-5 h-5 object-cover"
                 src="/searchicon.svg"
@@ -55,8 +55,10 @@ const MoviePage = () => {
           </div>
         </div>
         {isLoading ? (
-          <div className="flex justify-center mt-20">
-            <span className="w-10 h-10 rounded-full border-[5px] border-t-transparent border-pink-500 animate-spin"></span>
+          <div className="grid grid-cols-4 gap-10 px-4">
+            {new Array(20).fill(0).map((e,index) => (
+              <MovieItemSkeleton key={index} />
+            ))}
           </div>
         ) : movies.length > 0 ? (
           <div className="grid grid-cols-4 gap-10 px-4">
@@ -86,4 +88,4 @@ const MoviePage = () => {
   );
 };
 
-export default MoviePage 
+export default MoviePage;

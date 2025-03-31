@@ -25,7 +25,7 @@ const MovieItem = ({ item }) => {
         <h3 className="line-clamp-2">{title}</h3>
         <div className="mt-auto flex justify-between mb-5">
           <span>{new Date(release_date).getFullYear()}</span>
-          <span>{vote_average.toPrecision(2)}</span>
+          <span>{vote_average}</span>
         </div>
         <Button
           className={"w-full py-3 rounded-xl bg-purple-700 "}

@@ -20,7 +20,7 @@ const MovieCast = ({ movieId }) => {
         spaceBetween={20}
         slidesPerView={"auto"}
       >
-        {cast.map((e) => (
+        {cast?.map((e) => (
           <SwiperSlide className="max-w-[200px]" key={e.cast_id}>
             <div className="flex flex-col gap-5 justify-center items-center">
               <div className="h-[300px] w-full rounded-lg relative before:content-[' '] before:absolute before:bg-gray-400 before:inset-0 before:rounded-lg before:animate-pulse">

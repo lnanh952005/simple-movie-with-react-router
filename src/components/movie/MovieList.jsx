@@ -5,7 +5,7 @@ import { SwiperSlide, Swiper } from "swiper/react";
 import fetcher from "../../configs/Config";
 import MovieItem from "./MovieItem";
 import MovieItemSkeleton from "./MovieItemSkeleton";
-
+import {v4} from "uuid"
 const MovieList = ({ category }) => {
   const { data, error, isLoading } = useSWR(category, fetcher);
 
@@ -20,7 +20,7 @@ const MovieList = ({ category }) => {
           spaceBetween={40}
           slidesPerView={"auto"}
         >
-          {[1, 2, 3, 4, 5].map((e,index) => (
+          {new Array(5).fill(0).map((e,index) => (
             <SwiperSlide className="max-w-[300px] w-full" key={index}>
               <MovieItemSkeleton />
             </SwiperSlide>

@@ -1,12 +1,12 @@
-import React from 'react'
-import NoResult from './NoResult'
-import { Navigate, useNavigate } from 'react-router-dom';
-import Button from '../button/Button';
+import React from "react";
+import NoResult from "./NoResult";
+import { Navigate, useNavigate } from "react-router-dom";
+import Button from "../button/Button";
 
 const For0For = ({ error }) => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   return (
-    <div className="flex flex-col gap-10 w-[1000px] mx-auto">
+    <div className="flex flex-col justify-center items-center gap-10 h-screen">
       <NoResult />
       <h2 className="text-3xl text-center">{"May be you are lost..."}</h2>
       <Button
@@ -18,4 +18,4 @@ const For0For = ({ error }) => {
   );
 };
 
-export default For0For
+export default For0For;

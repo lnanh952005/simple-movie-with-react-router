@@ -2,6 +2,8 @@ import { lazy, Suspense } from "react";
 import "swiper/css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./layout/Header";
+import MoviePageV2 from "./pages/MoviePageV2";
+import For0For from "./components/404/For0For";
 // import HomePage from "./pages/HomePage";
 // import MoviePage from "./pages/MoviePage";
 // import MovieDetailPage from "./pages/MovieDetailPage";
@@ -19,9 +21,10 @@ const App = () => {
         <Routes>
           <Route element={<Header />}>
             <Route index element={<HomePage />} />
-            <Route path="/movies" element={<MoviePage />} />
+            <Route path="/movies" element={<MoviePageV2 />} />
             <Route path="/movies/:movieId" element={<MovieDetailPage />} />
           </Route>
+          <Route path="*" element={<For0For/>}></Route>
         </Routes>
       </Suspense>
     </BrowserRouter>

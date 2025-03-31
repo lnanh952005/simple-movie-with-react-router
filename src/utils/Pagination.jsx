@@ -1,11 +1,8 @@
 import React, { useContext, useState } from "react";
 import ReactPaginate from "react-paginate";
-
-import { ThemeContext } from "../pages/MoviePage";
 import style from "../assets/styles/pagination.module.scss";
 
-const PaginatedItems = ({ itemsPerPage, total_results }) => {
-  const { nextPage, setNextPage } = useContext(ThemeContext);
+const PaginatedItems = ({ itemsPerPage , total_results }) => {
   const [itemOffset, setItemOffset] = useState(0);
 
   const endOffset = itemOffset + itemsPerPage;
