@@ -1,13 +1,17 @@
-import React from 'react'
+import React from "react";
+import Button from "../button/Button";
+import { useNavigate } from "react-router-dom";
+import tmdbAPI from "../../configs/ApiConfig";
 
-const BannerItem = ({item}) => {
-     const { title, poster_path } = item;
+const BannerItem = ({ item }) => {
+  const { id,title, poster_path } = item;
+  const navigate = useNavigate();
   return (
     <div className=" relative w-full h-full rounded-lg">
       <div className="absolute inset-0 bg-gradient-to-t from-[rgba(0,0,0,0.5)] to-[rgba(0,0,0,0.5)] rounded-lg"></div>
       <img
         className=" w-full h-full object-cover rounded-lg"
-        src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+        src={tmdbAPI.getOriginalImg("w500", poster_path)}
         alt=""
       />
       <div className="absolute left-[5%] bottom-[10%] w-[40%] bg-transparent text-white">
@@ -23,10 +27,14 @@ const BannerItem = ({item}) => {
             Drama
           </span>
         </div>
-        <button className="py-3 px-10 bg-pink-500 rounded-lg">Watch Now</button>
+        <Button
+          onClick={(e) => navigate(`/movies/${id}`)}
+          className="bg-pink-500 py-3 px-6 rounded-xl"
+          content="Watch now"
+        />
       </div>
     </div>
   );
-}
+};
 
-export default BannerItem
+export default BannerItem;

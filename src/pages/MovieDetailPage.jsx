@@ -1,13 +1,13 @@
-
 import { useParams } from "react-router-dom";
 import useSWR from "swr";
-import fetcher, { api_key } from "../configs/Config";
+import fetcher from "../configs/Config";
 import styled from "styled-components";
 import MovieCast from "../components/movie/MovieCast";
 import MovieSimilar from "../components/movie/MovieSimilar";
 import MovieVideo from "../components/movie/MovieVideo";
-//https://api.themoviedb.org/3/movie/{movie_id}?api_key=b214ffc928a4d0c4b361593fdb4ad6ad
-
+import tmdbAPI from "../configs/ApiConfig";
+//https://api.themoviedb.org/3/movie/{movie_id}?apiKey=b214ffc928a4d0c4b361593fdb4ad6ad
+//tmdbAPI.getMovieId(movieId)
 const MovieType = styled.div`
   display: grid;
   grid-template-columns: ${(props) => `repeat(${props.cols},1fr)`};
@@ -16,14 +16,11 @@ const MovieType = styled.div`
 `;
 
 const MovieDetailPage = () => {
-  useSWR, fetcher;
   const { movieId } = useParams();
-  
-  const { data: movieData } = useSWR(
-    `https://api.themoviedb.org/3/movie/${movieId}?api_key=${api_key}`,
-    fetcher
-  );
 
+  const { data: movieData } = useSWR(tmdbAPI.getMovieId(movieId), fetcher);
+  if (!movieData) return null;
+  console.log(movieData);
   return (
     <>
       {movieData && (
@@ -35,21 +32,21 @@ const MovieDetailPage = () => {
             }`}
             style={{
               backgroundImage: movieData?.backdrop_path
-                ? `url(https://image.tmdb.org/t/p/original${movieData?.backdrop_path})`
+                ? `url(${tmdbAPI.getOriginalImg("original",movieData?.backdrop_path)})`
                 : "none",
             }}
           ></div>
           <div className="flex flex-col px-5 w-[840px] mx-auto -mt-[100px] relative gap-[58px]">
             <img
               className="w-full h-[400px] object-cover rounded-lg"
-              src={`https://image.tmdb.org/t/p/original${movieData?.poster_path}`}
+              src={`${tmdbAPI.getOriginalImg("original",movieData?.poster_path)}`}
               alt=""
             />
             <h1 className="text-center font-[600] text-5xl mt-10">
               {movieData?.title}
             </h1>
-            <MovieType cols={movieData?.genres.length}>
-              {movieData?.genres.map((e) => (
+            <MovieType cols={movieData?.genres?.length}>
+              {movieData?.genres?.map((e) => (
                 <span
                   className="px-4 py-2 border-2 rounded-[9999px] border-purple-700 text-center"
                   key={e.id}

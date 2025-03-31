@@ -1,31 +1,36 @@
 import React from "react";
-import fetcher, { api_key } from "../../configs/Config";
+import fetcher from "../../configs/Config";
 import useSWR from "swr";
 import styled from "styled-components";
+import tmdbAPI from "../../configs/ApiConfig";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 const MovieVideo = ({ movieId }) => {
-  const { data } = useSWR(
-    `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${api_key}`,
-    fetcher
-  );
+  const { data } = useSWR(tmdbAPI.getMovieDetail("videos", movieId), fetcher);
   if (!data) return null;
   const { results } = data;
-
-  console.log(results);
+  console.log(data);
 
   return (
-    <div className="h-[500px]">
-      {results[0]?.key && (
-        <iframe
-          className="w-full h-full rounded-lg"
-          src={`https://www.youtube.com/embed/${results[0]?.key}`}
-          title={results[0]?.name}
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowFullScreen
-        ></iframe>
-      )}
-    </div>
+    <>
+      <h2 className="text-center font-bold text-4xl">Videos</h2>
+      <div className="flex flex-col gap-10">
+        {results.length > 0 &&
+          results.slice(0,2).map((e) => (
+            <div>
+              <h3 className="text-2xl mb-3">{e.name}</h3>
+              <iframe
+                key={e.id}
+                className="w-full h-[400px] rounded-lg"
+                src={tmdbAPI.getYoutubeTrailer(e.key)}
+                title={e.name}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              ></iframe>
+            </div>
+          ))}
+      </div>
+    </>
   );
 };
 

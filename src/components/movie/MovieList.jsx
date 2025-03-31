@@ -1,30 +1,48 @@
-//https://api.themoviedb.org/3/search/movie?api_key=b214ffc928a4d0c4b361593fdb4ad6ad&query=avengers
+//https://api.themoviedb.org/3/search/movie?apiKey=b214ffc928a4d0c4b361593fdb4ad6ad&query=avengers
 import useSWR from "swr";
 
 import { SwiperSlide, Swiper } from "swiper/react";
 import fetcher from "../../configs/Config";
 import MovieItem from "./MovieItem";
-import MovieStyle  from "./MovieStyle";
+import MovieItemSkeleton from "./MovieItemSkeleton";
 
 const MovieList = ({ category }) => {
   const { data, error, isLoading } = useSWR(category, fetcher);
 
-  const movieList = data?.results;
-
-  console.log(data);
+  const movieList = data?.results || [];
 
   return (
-    <MovieStyle >
-      <Swiper grabCursor="true" spaceBetween={40} slidesPerView={"auto"}>
-        {movieList?.length > 0 &&
-          movieList.map((e) => (
-            <SwiperSlide  key={e.id}>
-              <MovieItem item={e} />
+    <>
+      {isLoading ? (
+        <Swiper
+          className="flex"
+          grabCursor="true"
+          spaceBetween={40}
+          slidesPerView={"auto"}
+        >
+          {[1, 2, 3, 4, 5].map((e,index) => (
+            <SwiperSlide className="max-w-[300px] w-full" key={index}>
+              <MovieItemSkeleton />
             </SwiperSlide>
           ))}
-      </Swiper>
-    </MovieStyle>
+        </Swiper>
+      ) : (
+        <Swiper
+          className="flex"
+          grabCursor="true"
+          spaceBetween={40}
+          slidesPerView={"auto"}
+        >
+          {movieList.length > 0 &&
+            movieList.map((e) => (
+              <SwiperSlide className="max-w-[300px] w-full" key={e.id}>
+                <MovieItem item={e} />
+              </SwiperSlide>
+            ))}
+        </Swiper>
+      )}
+    </>
   );
 };
 
-export default MovieList
+export default MovieList;
