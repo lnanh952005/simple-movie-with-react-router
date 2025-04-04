@@ -11,7 +11,7 @@ const MovieItem = ({ item }) => {
   const { title, poster_path, release_date, vote_average, id } = item;
   return (
     <div className="flex flex-col h-full rounded-lg p-3 bg-slate-800 select-none">
-      <div className="h-[250px] overflow-hidden rounded-lg">
+      <div className="relative h-[250px] overflow-hidden rounded-lg">
         <img
           className={
             "block w-full h-full object-cover rounded-lg cursor-pointer hover:scale-110 transition-all duration-300 hover:rotate-2"

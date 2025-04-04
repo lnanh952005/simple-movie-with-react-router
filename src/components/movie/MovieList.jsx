@@ -5,7 +5,6 @@ import { SwiperSlide, Swiper } from "swiper/react";
 import fetcher from "../../configs/Config";
 import MovieItem from "./MovieItem";
 import MovieItemSkeleton from "./MovieItemSkeleton";
-import {v4} from "uuid"
 const MovieList = ({ category }) => {
   const { data, error, isLoading } = useSWR(category, fetcher);
 

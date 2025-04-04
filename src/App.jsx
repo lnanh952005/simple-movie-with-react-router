@@ -4,9 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./layout/Header";
 import MoviePageV2 from "./pages/MoviePageV2";
 import For0For from "./components/404/For0For";
-// import HomePage from "./pages/HomePage";
-// import MoviePage from "./pages/MoviePage";
-// import MovieDetailPage from "./pages/MovieDetailPage";
+
 
 const HomePage = lazy(() => import("./pages/HomePage"));
 const MoviePage = lazy(() => import("./pages/MoviePage"));
@@ -21,7 +19,7 @@ const App = () => {
         <Routes>
           <Route element={<Header />}>
             <Route index element={<HomePage />} />
-            <Route path="/movies" element={<MoviePageV2 />} />
+            <Route path="/movies" element={<MoviePage />} />
             <Route path="/movies/:movieId" element={<MovieDetailPage />} />
           </Route>
           <Route path="*" element={<For0For/>}></Route>
