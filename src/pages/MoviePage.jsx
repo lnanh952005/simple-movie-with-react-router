@@ -78,6 +78,8 @@ const MoviePage = () => {
         {movies.length > 0 && (
           <div className="mx-auto mb-[20px]">
             <PaginatedItems
+              nextPage={nextPage}
+              setNextPage={setNextPage}
               itemsPerPage={20}
               total_results={data?.total_results}
             />
